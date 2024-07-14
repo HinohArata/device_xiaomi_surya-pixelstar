@@ -1,35 +1,56 @@
+# Color
+cyan="\033[96m"
+green="\033[92m"
+red="\033[91m"
+blue="\033[94m"
+yellow="\033[93m"
+
 # Hardware
 HW="hardware/xiaomi"
-if [ -d "$HW" ]; then
-    rm -rf "$HW"
-    git clone -q https://github.com/LineageOS/android_hardware_xiaomi.git -b lineage-21 hardware/xiaomi
-else
-    echo -e "\nCloning ${HW} failed"
+if ! [ -d "$HW" ]; then
+    echo "${blue}$HW not found! Cloning to now...\033[0m"
+    if ! git clone -q https://github.com/LineageOS/android_hardware_xiaomi.git -b lineage-21 hardware/xiaomi; then
+        echo "Cloning failed! Aborting...\033[0m"
+        exit 1
+    fi
 fi
 
 # Vendor
-git clone -q https://github.com/HinohArata/surya_vendor.git vendor/xiaomi/surya
+VT="vendor/xiaomi/surya"
+if ! [ -d "$VT" ]; then
+    echo "${blue}$VT not found! Cloning to now...\033[0m"
+    if ! git clone -q https://github.com/HinohArata/surya_vendor.git -b 14 vendor/xiaomi/surya; then
+        echo "${red}Cloning failed! Aborting...\033[0m"
+        exit 1
+    fi
+fi
 
 # Kernel
-git clone -q --depth=1 https://github.com/HinohArata/surya_kernel.git -b main kernel/xiaomi/surya
+KT="kernel/xiaomi/surya"
+if ! [ -d "$KT" ]; then
+    echo "${blue}$KT not found! Cloning to now...\033[0m"
+    if ! git clone -q https://github.com/HinohArata/kernel_xiaomi_surya.git -b claire kernel/xiaomi/surya; then
+        echo "${red}Cloning failed! Aborting...\033[0m"
+        exit 1
+    fi
+fi
 
 # Firmware
-git clone -q https://gitlab.com/HinohArata/firmware_xiaomi_surya.git firmware/xiaomi/surya
+FW="firmware/xiaomi/surya"
+if ! [ -d "$FW" ]; then
+    echo "${blue}$FW not found! Cloning to now...\033[0m"
+    if ! git clone -q https://gitlab.com/HinohArata/firmware_xiaomi_surya.git firmware/xiaomi/surya; then
+        echo "${red}Cloning failed! Aborting...\033[0m"
+        exit 1
+    fi
+fi
 
 # MiuiCamera
-git clone -q https://gitlab.com/HinohArata/vendor_xiaomi_surya-miuicamera.git -b leica vendor/xiaomi/camera
-
-# Parts
-WORK_DIR="$(pwd)"
-DT="device/xiaomi/surya"
-if [ -d "$DT" ]; then
-    cd "$DT"; rm -rf parts
-    if git clone -q https://github.com/HinohArata/parts; then
-        echo -e "\nCloning new XiaomiParts success"
+CAM="vendor/xiaomi/camera"
+if ! [ -d "$CAM" ]; then
+    echo "${blue}$CAM not found! Cloning to now...\033[0m"
+    if ! git clone -q https://github.com/hinohArata/vendor_xiaomi_camera.git -b 14 vendor/xiaomi/camera; then
+        echo "${red}Cloning failed! Aborting...\033[0m"
+        exit 1
     fi
-    cd "$WORK_DIR"
-else
-    echo -e "\nCan't clone new XiaomiParts"
-    cd "$WORK_DIR"
-    exit 1
 fi
