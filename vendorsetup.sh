@@ -42,3 +42,12 @@ if ! [ -d "$CAM" ]; then
         echo "Cloning failed! Aborting..."
     fi
 fi
+
+# Device lineage sepolicy
+SEPOL="device/lineage/sepolicy"
+if ! [ -d "$SEPOL" ]; then
+    echo "$SEPOL not found! Cloning to now..."
+    if ! git clone -q https://github.com/LineageOS/android_device_lineage_sepolicy -b lineage-21.0 device/lineage/sepolicy; then
+        echo "Cloning failed! Aborting..."
+    fi
+fi
