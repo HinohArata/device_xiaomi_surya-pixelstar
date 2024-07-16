@@ -12,23 +12,24 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, device/xiaomi/surya/device.mk)
 
 # Inherit some common Lineage stuff.
-$(call inherit-product, vendor/everest/config/common_full_phone.mk)
+$(call inherit-product, vendor/pixelstar/config/common_full_phone.mk)
 
 # Boot animation resolution.
 TARGET_BOOT_ANIMATION_RES := 1080
 
-# Maintainer
-EVEREST_MAINTAINER := Skyy丨HinohArata
-EVEREST_BUILD_TYPE := OFFICIAL
-
-# Extra Stuffs
-TARGET_SUPPORTS_BLUR := true
-TARGET_BUILD_INNERTUNE := true
-WITH_GAPPS := true
-TARGET_INCLUDE_PIXEL_LAUNCHER := false
+# Pixelstar Flags
+PIXELSTAR_BUILD_TYPE := UNOFFICIAL
+TARGET_FACE_UNLOCK_SUPPORTED := true
+TARGET_ARCH := arm64
+TARGET_INCLUDE_STOCK_ARCORE := true
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
+TARGET_INCLUDE_LIVE_WALLPAPERS := false
+USE_PIXEL_CHARGER := true
+TARGET_SUPPORTS_QUICK_TAP := true 
+TARGET_SUPPORTS_CALL_RECORDING := true
 
 # Device Manufacture
-PRODUCT_NAME := everest_surya
+PRODUCT_NAME := pixelstar_surya
 PRODUCT_DEVICE := surya
 PRODUCT_BRAND := POCO
 PRODUCT_MODEL := M2007J20CG

@@ -1,13 +1,13 @@
 #
-# Copyright (C) 2021 The EverestOS Project
+# Copyright (C) 2021 The Pixelstar Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/everest_surya.mk
+    $(LOCAL_DIR)/pixelstar_surya.mk
 
 COMMON_LUNCH_CHOICES := \
-    everest_surya-user \
-    everest_surya-userdebug \
-    everest_surya-eng
+    pixelstar_surya-user \
+    pixelstar_surya-userdebug \
+    pixelstar_surya-eng
